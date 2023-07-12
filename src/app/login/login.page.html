@@ -1,0 +1,31 @@
+<ion-content style="overflow: scroll" class="background">
+  <div style="height: 7%"></div>
+  <ion-grid>  
+    <ion-row class="ion-justify-content-center"> 
+        <img src="assets/icon/logo.png" width="170px">
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-item class="input-style" style="margin-bottom: 10px">
+        <ion-input type="email" placeholder="Enter email address" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-style">
+        <ion-input type="password" placeholder="Enter password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+    </ion-row>
+    
+    <ion-row class="ion-justify-content-center login-btn">
+      <ion-button style="width: 70%" expand="block" color="success" shape="round" (click) ="loginUser()">Login</ion-button>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center login-btn">
+      <ion-label color="success" [routerLink]="['/forgot-password']">Forgot Password?</ion-label>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center login-btn">
+      <ion-label color="success" [routerLink]="['/register']">New User? Create an Account</ion-label>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

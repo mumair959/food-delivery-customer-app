@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar color="success">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  
+      <ion-buttons slot="end" [routerDirection]="'root'" [routerLink]="['/cart']">
+          <ion-badge class="cartStyle" color="danger">{{cartCount}}</ion-badge>
+        <ion-icon style="font-size: 35px" name="cart"></ion-icon>
+      </ion-buttons>
+      
+      <ion-title>
+        Share And Earn
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-card>
+      <ion-grid class="gridStyle">
+
+        <ion-icon class="iconStyle" name="cash"></ion-icon>
+
+        <ion-title>Your Referal Code</ion-title>
+        <ion-title class="referStyle">{{userReferCode}}</ion-title>
+        <ion-button style="margin-top:-4px" (click)="shareApp()" color="success" expand="block">Share the Code</ion-button>
+
+      </ion-grid>
+    </ion-card>
+  </ion-content>

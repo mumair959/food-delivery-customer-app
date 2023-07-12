@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" [routerDirection]="'root'" [routerLink]="['/cart']">
+        <ion-badge class="cartStyle" color="danger">{{cartCount}}</ion-badge>
+      <ion-icon style="font-size: 35px" name="cart"></ion-icon>
+    </ion-buttons>
+    
+    <ion-title>
+      My Orders
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="orders.length == 0" style="text-align: center">
+    <ion-card-header>
+      <ion-icon name="search" style="font-size: 100px; font-weight: bold" color="success"></ion-icon>
+      <ion-card-title>No Orders Yet</ion-card-title>
+      <ion-card-subtitle>
+        You don't have any orders yet. Try one of our awesome restaurants and place your first order
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-button color="success" expand="block">BROWSE RESTAURANTS</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="success" *ngIf="orders.length > 0" style="text-align: center">
+    <ion-badge color="success" style="font-size:16px;">For any query please contact on: 03152736413</ion-badge>
+  </ion-card>
+
+  <ion-card *ngFor="let order of orders">
+    <ion-card-header>
+      <ion-card-title>
+        <span style="font-size: 20px">Order Info</span> 
+        <ion-button style="margin-top: -15px" *ngIf="order.order_status == 'Pending'" size="small" color="warning">{{order.order_status}}</ion-button>
+        <ion-button style="margin-top: -15px" *ngIf="order.order_status == 'Recieved' || order.order_status == 'In Progress'" size="small" color="primary">{{order.order_status}}</ion-button>
+        <ion-button style="margin-top: -15px" *ngIf="order.order_status == 'Decline'" size="small" color="danger">{{order.order_status}}</ion-button>
+      </ion-card-title>
+      <ion-badge color="danger" *ngIf="order.message != null">{{order.message}}</ion-badge>
+      <ion-card-subtitle><p>Order Time: {{order.order_on}}</p></ion-card-subtitle> 
+      <ion-card-subtitle><p>Estimated Delivery Time: {{order.deliver_on}}</p></ion-card-subtitle> 
+      <ion-card-subtitle><p>Order Amount: Rs.{{order.net_amount}}</p></ion-card-subtitle> 
+      <ion-card-subtitle *ngIf="order.promocode_fare != null"><p>Promocode Amount: Rs.{{order.promocode_fare}}</p></ion-card-subtitle>
+      <ion-card-subtitle><p>Payment Method: Cash on delivery</p></ion-card-subtitle>      
+      
+      <ion-button expand="block" color="success" (click)="viewDetail(order)">View Detail</ion-button>        
+    </ion-card-header>
+  </ion-card>
+</ion-content>

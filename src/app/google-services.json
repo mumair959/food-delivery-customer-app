@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "372953630177",
+    "firebase_url": "https://pohnchadoofcm.firebaseio.com",
+    "project_id": "pohnchadoofcm",
+    "storage_bucket": "pohnchadoofcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372953630177:android:1c58be8af856221ed5fea0",
+        "android_client_info": {
+          "package_name": "pk.pohnchaDoo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372953630177-i7vkmmq1f64tbeeme970gsqbjalt35uo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnPoWzhrA23huHqwFqyPsejBd1zvAI6Hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372953630177-i7vkmmq1f64tbeeme970gsqbjalt35uo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,37 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu type="overlay">
+      <ion-header class='menu-head'>
+        <ion-toolbar color="success" class="menu-toolbar">
+          <img src="assets/avatar/default-avatar.png" class="avatar">
+          <ion-title>{{loggedInUser}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon" color="success"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <!-- <ion-item (click)="shareApp()">
+            <ion-icon slot="start" ios="ios-cash" md="md-cash" color="success"></ion-icon>
+            <ion-label>
+              Share And Earn
+            </ion-label>
+          </ion-item> -->
+          <ion-item (click)="logoutApp()">
+            <ion-icon slot="start" ios="ios-exit" md="md-exit" color="success"></ion-icon>
+            <ion-label>
+              Logout
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

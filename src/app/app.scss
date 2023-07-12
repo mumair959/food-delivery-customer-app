@@ -1,0 +1,22 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These 
+// styles are for the entire app and not just one component. Additionally, this 
+// file can hold Sass mixins, functions, and placeholder classes to be imported 
+// and used throughout the application.
+
+.menu-head{
+    height: 25%;
+}
+
+.menu-toolbar{
+    height: 100%;
+    text-align: center;
+}
+
+.avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin-top: 10%;
+}

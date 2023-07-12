@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end"  [routerDirection]="'root'" [routerLink]="['/cart']">
+        <ion-badge class="cartStyle" color="danger">{{cartCount}}</ion-badge>
+      <ion-icon style="font-size: 35px" name="cart"></ion-icon>
+    </ion-buttons>
+
+    <ion-title style="margin-left: 70px">
+      <img src="assets/icon/logo.png" width="65px">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+  <ion-content>
+
+      <ion-slides *ngIf="serviceNotFound != true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+        <ion-slide *ngFor="let slide of slideImages" style="width: 150px; height: 150px; border: 2px solid #f8f8f8">
+          <ion-col>
+            <ion-img style="pointer-events:none" src="{{slide}}"></ion-img>
+          </ion-col>
+        </ion-slide>
+      </ion-slides>
+
+    <ion-card *ngIf="serviceNotFound == true" style="text-align: center">
+      <ion-card-header>
+        <ion-icon name="warning" style="font-size: 100px; font-weight: bold" color="success"></ion-icon>
+        <ion-card-title>Service Unavailable</ion-card-title>
+        <ion-card-subtitle>
+          Unfortunately our service is unavailable in your area right now, we will be right back
+        </ion-card-subtitle>
+      </ion-card-header>
+  </ion-card>
+
+  <ion-card style="margin-bottom: 35px" *ngFor="let category of categories" [disabled]="category.is_available == '0'">
+    <!-- <ion-card-header> -->
+      <ion-card-title class="headingStyle">{{category.name}}</ion-card-title>
+      <ion-card-title class="subHeadingStyle">Delivery Time: {{category.delivery_time}}</ion-card-title>
+      <ion-card-title class="subHeading2Style">Min. Order: Rs.{{category.min_order}}</ion-card-title>
+      <ion-card-title *ngIf="category.name == 'Grocery'" class="subHeading3Style">Free Delivery</ion-card-title>
+    <!-- </ion-card-header> -->
+    <img src="https://www.pohnchadoo.pk/storage/{{category.category_img}}" height="160px" (click)="viewVendors(category)"/>
+  </ion-card>
+
+</ion-content>

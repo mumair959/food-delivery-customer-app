@@ -1,0 +1,43 @@
+.headingStyle{
+    font-size: 18px;
+    background-color: #00cc00;
+    color: #ffffff;
+    position: absolute;
+    padding: 3px 12px;
+}
+
+.subHeadingStyle{
+    font-size: 14px;
+    background-color: #00cc00;
+    color: #ffffff;
+    position: absolute;
+    right: 0;
+    top: 105px;
+    padding: 3px 10px;
+}
+
+.subHeading2Style{
+    font-size: 14px;
+    background-color: #00cc00;
+    color: #ffffff;
+    position: absolute;
+    right: 0;
+    top: 130px;
+    padding: 3px 10px;
+}
+
+.subHeading3Style{
+    font-size: 12px;
+    background-color: red;
+    color: #ffffff;
+    position: absolute;
+    top: 130px;
+    padding: 3px 10px;
+  }
+
+.cartStyle{
+    position: absolute; 
+    z-index:9999; 
+    margin-top: -15px; 
+    margin-left: 17px;
+}

@@ -1,0 +1,63 @@
+<ion-content class="background">
+  <!-- <div style="height: 2%"></div> -->
+  <ion-grid>  
+    <ion-row class="ion-justify-content-center"> 
+        <img src="assets/icon/logo.png" width="130px" height="130px">
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+
+      <ion-col size="5">
+        <ion-item class="input-style">
+          <ion-input type="text" [(ngModel)]="user.first_name" placeholder="First name"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="5">
+        <ion-item class="input-style">
+          <ion-input type="text" [(ngModel)]="user.last_name" placeholder="Last name"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-item class="input-style">
+          <ion-input type="text" [(ngModel)]="user.phone_num" placeholder="Enter cell number"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-item class="input-style">
+          <ion-input type="email" [(ngModel)]="user.email" placeholder="Enter email address"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-item class="input-style">
+          <ion-input type="password" [(ngModel)]="user.password" placeholder="Enter password"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-item class="input-style">
+          <ion-input type="password" [(ngModel)]="user.confirm_password" placeholder="Confirm password"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="10">
+          <ion-item class="input-style">
+            <ion-input type="text" [(ngModel)]="user.referal_code" placeholder="Enter Referal Code"></ion-input>
+          </ion-item>
+      </ion-col>
+          
+    </ion-row>
+    
+    <ion-row class="ion-justify-content-center register-btn">
+      <ion-button style="width: 80%" shape="round" expand="block" color="success" (click)="register(user)">Register</ion-button>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center register-btn">
+      <ion-label color="success" [routerLink]="['/login']">Already have an account? Login</ion-label>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+  
+  

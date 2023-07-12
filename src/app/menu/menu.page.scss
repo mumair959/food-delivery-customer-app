@@ -1,0 +1,32 @@
+.menu-text{
+    font-weight: bold;
+}
+
+.price{
+    font-size: 16px;
+}
+
+.prevPrice{
+    font-size: 13px;
+}
+
+.cartStyle{
+    position: absolute; 
+    z-index:9999; 
+    margin-top: -15px; 
+    margin-left: 17px;
+}
+
+.headingStyle{
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.fixBottom{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}

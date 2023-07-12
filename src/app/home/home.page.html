@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" [routerDirection]="'root'" [routerLink]="['/cart']">
+        <ion-badge class="cartStyle" color="danger">{{cartCount}}</ion-badge>
+      <ion-icon style="font-size: 35px" name="cart"></ion-icon>
+    </ion-buttons>
+    
+    <ion-title>
+      Vendor List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredRestaurant()"></ion-searchbar>
+
+  <ion-card style="margin-bottom: 35px" *ngFor="let vendor of filteredVendors" [disabled]="vendor.is_available == '0'">
+
+    <ion-card-title class="headingStyle">{{vendor.vendor_name}}</ion-card-title>
+    <ion-card-title class="subHeadingStyle">(Delivery Charges: Rs. {{vendor.delivery_charges}})</ion-card-title>
+    <ion-card-title class="subHeading2Style">(Minimum Order: Rs. {{vendor.min_order}})</ion-card-title>
+    <ion-card-title *ngIf="vendor.max_discount[0] > 0" class="subHeading3Style">Discount upto {{vendor.max_discount[0]}}%</ion-card-title>
+
+    <img *ngIf="vendor.vendor_img != null" src="https://www.pohnchadoo.pk/storage/{{vendor.vendor_img}}" height="160px" (click)="viewMenuDetail(vendor)"/>
+    <img *ngIf="vendor.vendor_img == null" src="assets/avatar/image-not-found.png" height="160px" (click)="viewMenuDetail(vendor)"/>
+  </ion-card>
+
+  <ion-card *ngIf="filteredVendors.length == 0" style="text-align: center">
+    <ion-card-header>
+      <ion-icon name="search" style="font-size: 80px; font-weight: bold" color="success"></ion-icon>
+      <ion-card-title style="font-size: 20px; font-weight: bold; color: gray">No Restaurants Found</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>
+

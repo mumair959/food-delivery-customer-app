@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-toolbar color="success">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Customize
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row style="border-bottom: 1px solid grey">
+    <ion-col size="7">
+      <h4>{{productInfo.name}}</h4>
+    </ion-col>
+    <ion-col size="5" style="text-align: right">
+      <h5>from Rs. {{productInfo.net_price}} <span class="prevPrice" *ngIf="productInfo.discount > 0"><del style="color: red">{{productInfo.price}}</del></span></h5>
+    </ion-col>
+  </ion-row>
+  <ion-list *ngIf="productInfo.variant_1">
+    <ion-radio-group>
+      <ion-list-header>
+        <h4 style="font-weight: bold">{{productInfo.variant_1}}</h4>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let variant of productVariant1">
+        <ion-label>{{variant.variant_val_1}} (Rs. {{variant.net_price}} <span class="prevPrice" *ngIf="variant.discount > 0"><del style="color: red">{{variant.price}}</del></span>)</ion-label>
+        <ion-radio color="success" (click)="selectVariant1(variant.variant_val_1)"></ion-radio>
+      </ion-item>  
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-list *ngIf="productInfo.variant_2 && variant_1_val">
+    <ion-radio-group>
+      <ion-list-header>
+        <h4 style="font-weight: bold">{{productInfo.variant_2}}</h4>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let variant of productVariant2">
+        <ion-label>{{variant.variant_val_2}}</ion-label>
+        <ion-radio color="success" (click)="selectVariant2(variant.variant_val_2)"></ion-radio>
+      </ion-item>  
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-list *ngIf="productInfo.variant_3 && variant_2_val">
+    <ion-radio-group>
+      <ion-list-header>
+        <h4 style="font-weight: bold">{{productInfo.variant_3}}</h4>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let variant of productVariant3">
+        <ion-label>{{variant.variant_val_3}}</ion-label>
+        <ion-radio color="success" (click)="selectVariant3(variant.variant_val_3)"></ion-radio>
+      </ion-item>  
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-grid>
+    <ion-button expand="block" color="success" (click)="addToCart()" [disabled]="cartBtn">Add to cart</ion-button>               
+  </ion-grid>
+</ion-content>

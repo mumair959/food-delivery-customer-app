@@ -1,0 +1,177 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Cart
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      
+      <ion-row *ngFor="let cartItem of cartItems">
+        <ion-col size="5">
+          <ion-icon (click)="decrementItem(cartItem)" name="remove-circle" color="success" style="font-size: 20px"></ion-icon>
+          <ion-badge color="light" style="font-size: 15px">{{cartItem.quantity}} <span *ngIf="cartItem.measure_unit">{{cartItem.measure_unit}}</span></ion-badge>
+          <ion-icon (click)="incrementItem(cartItem)" name="add-circle" color="success" style="font-size: 20px"></ion-icon>
+        </ion-col>
+        <ion-col size="4">
+          <h2>{{cartItem.name}}</h2>
+          <p *ngIf="cartItem.description">
+            ({{cartItem.description}})
+          </p>
+          <p *ngIf="cartItem.product_variant_id">
+            (<span *ngIf="cartItem.variant_1">{{cartItem.variant_1}}</span>
+            <span *ngIf="cartItem.variant_2"> / {{cartItem.variant_2}}</span>
+            <span *ngIf="cartItem.variant_3"> / {{cartItem.variant_3}}</span>)
+          </p>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{cartItem.net_price}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="border-top: 1px solid grey">
+        <ion-col size="9">
+          <h2>Subtotal</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{cartInfo.subtotal}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="9">
+          <h2>Delivery fee</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{cartInfo.delivery_fee}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="9">
+          <h2>VAT (incl.)</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{ cartInfo.vat }}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="promoCode == true">
+        <ion-col size="9">
+          <h2>Promo Code Amount</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{ voucher.amount }}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="walletRedeemed == true">
+        <ion-col size="9">
+          <h2>Wallet Amount</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{ walletAmount }}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="promoCode == false && walletRedeemed == false">
+        <ion-col size="6">
+          <h2>Offer</h2>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button style="margin-top:-4px" (click)="enterPromoCode()" color="success" size="small">Use Promo Code</ion-button>            
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="border-top: 1px solid grey">
+        <ion-col size="9">
+          <h2 style="font-weight:bolder">Total</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2 *ngIf="promoCode == false" style="font-weight:bolder">Rs. {{ cartInfo.total - walletAmount }}</h2>
+          <h2 *ngIf="promoCode == true" style="font-weight:bolder">Rs. {{ cartInfo.total - voucher.amount - walletAmount }}</h2>
+          <h2 *ngIf="promoCode == true" style="font-weight:bolder"><del style="color: red">Rs. {{ cartInfo.total - walletAmount }}</del></h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="walletRedeemed == false">
+        <ion-col size="6">
+          <h2></h2>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button style="margin-top:-4px"  (click)="redeemYourWallet()" color="success" size="small">Redeem Wallet</ion-button>            
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      
+      <ion-row style="border-bottom: 1px solid grey">
+        <ion-col size="4">
+          <h2>Contact info</h2>
+        </ion-col>
+        <ion-col size="8">
+          <h2 style="text-align: right">{{userInfo.email}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="3">
+          <h2>Address</h2>
+        </ion-col>
+        <ion-col size="9" *ngIf="userAddress.length == 0">
+          <ion-label (click)="gotoAddress()" style="float:right; font-size: 16px" color="danger">Enter Address</ion-label>
+        </ion-col>
+        <ion-col size="8" *ngIf="userAddress.length > 0">
+          <h2 style="text-align: right">{{selectedAddress}}</h2>
+        </ion-col>
+        <ion-col size="1" *ngIf="userAddress.length > 0">
+          <ion-label (click)="openAddressDropdown()">
+            <ion-icon name="arrow-dropdown" style="font-size: 30px; font-weight: bold" color="success"></ion-icon>              
+          </ion-label>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="3">
+          <h2>Phone#</h2>
+        </ion-col>
+        <ion-col size="9">
+          <h2 style="text-align: right">{{userInfo.customer.phone_num}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="3">
+          <h2>Payment</h2>
+        </ion-col>
+        <ion-col size="9">
+          <h2 style="text-align: right">Cash on delivery</h2>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-textarea rows="3" cols="20" [(ngModel)]="optional_note" placeholder="Note (Optional)"></ion-textarea>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+        <ion-button expand="block" color="success" [disabled]="cartInfo.subtotal <= 0 || userAddress.length == 0" (click)="ConfirmPlaceOrder()">Place Order</ion-button>
+        <ion-button expand="block" color="success" (click)="gotoDashboard()">Continue Shopping</ion-button>               
+  </ion-grid>
+</ion-content>

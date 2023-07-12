@@ -1,0 +1,163 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-icon (click)=goBack() style="font-size: 30px" slot="start" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+    </ion-buttons>
+
+    <ion-buttons slot="end" [routerDirection]="'root'" [routerLink]="['/cart']">
+        <ion-badge class="cartStyle" color="danger">{{cartCount}}</ion-badge>
+      <ion-icon style="font-size: 35px" name="cart"></ion-icon>
+    </ion-buttons>
+    
+    <ion-title>
+      Order Detail
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      
+      <ion-row *ngFor="let items of orderDetail.order_items">
+        <ion-col size="3">
+          <ion-badge color="light" style="font-size: 15px">{{items.quantity}} <span *ngIf="items.measure_unit">{{items.measure_unit}}</span></ion-badge>
+        </ion-col>
+        <ion-col size="6">
+          <h2>{{items.name}}</h2>
+          <p *ngIf="items.description">
+            ({{items.description}})
+          </p>
+          <p *ngIf="items.variant_val_1">
+            (<span *ngIf="items.variant_val_1">{{items.variant_val_1}}</span>
+            <span *ngIf="items.variant_val_2"> / {{items.variant_val_2}}</span>
+            <span *ngIf="items.variant_val_3"> / {{items.variant_val_3}}</span>)
+          </p>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{items.net_price}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="border-top: 1px solid grey">
+        <ion-col size="9">
+          <h2>Subtotal</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{orderDetail.amount}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="9">
+          <h2>Delivery fee</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{orderDetail.delivery_fee}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="9">
+          <h2>VAT (Incl.)</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2>Rs. {{orderDetail.vat}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="orderDetail.promocode_fare != null">
+        <ion-col size="9">
+          <h2 style="color: red">Promo Code Amount</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2 style="color: red">Rs. -{{ orderDetail.promocode_fare }}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="orderDetail.wallet_redeem != null">
+        <ion-col size="9">
+          <h2 style="color: red">Wallet Redeem Amount</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2 style="color: red">Rs. -{{ orderDetail.wallet_redeem }}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="border-top: 1px solid grey">
+        <ion-col size="9">
+          <h2 style="font-weight:bolder">Total</h2>
+        </ion-col>
+        <ion-col size="3" style="text-align: right">
+          <h2 style="font-weight:bolder">Rs. {{ orderDetail.net_amount }}</h2>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+
+      <ion-row style="border-bottom: 1px solid grey">
+        <ion-col size="4">
+          <h2>Name</h2>
+        </ion-col>
+        <ion-col size="8">
+          <h2 style="text-align: right">{{orderDetail.first_name+' '+orderDetail.last_name}}</h2>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row style="border-bottom: 1px solid grey">
+        <ion-col size="4">
+          <h2>Contact info</h2>
+        </ion-col>
+        <ion-col size="8">
+          <h2 style="text-align: right">{{orderDetail.email}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="border-bottom: 1px solid grey">
+        <ion-col size="4">
+          <h2>Address</h2>
+        </ion-col>
+        <ion-col size="8">
+          <h2 style="text-align: right">{{orderDetail.house_num+' '+orderDetail.street+' '+orderDetail.area}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="border-bottom: 1px solid grey">
+        <ion-col size="4">
+          <h2>Phone#</h2>
+        </ion-col>
+        <ion-col size="8">
+          <h2 style="text-align: right">{{orderDetail.phone_num}}</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="4">
+          <h2>Payment</h2>
+        </ion-col>
+        <ion-col size="8">
+          <h2 style="text-align: right">Cash on delivery</h2>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="orderDetail.note != null">
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="4">
+          <h2>Important Note</h2>
+        </ion-col>
+        <ion-col size="8">
+          <h2 style="text-align: left">{{orderDetail.note}}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

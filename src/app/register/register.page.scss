@@ -1,0 +1,25 @@
+.register-head{
+    font-size: 24px;
+    font-weight: bold;
+    color: #00e600;
+    margin-bottom: 24px;
+}
+
+.register-btn{
+    margin-top: 18px;
+}
+
+.input-style{
+    border-radius: 30px;
+    margin-bottom: 7px;    
+}
+
+ion-item {
+    --border-radius: 30px;
+    --highlight-color-focused: none;
+    --highlight-color-valid: none;
+}
+
+ion-content.background{
+    --background: url('../../assets/backgrounds/register.png') 0 0/100% 100% no-repeat;
+}
